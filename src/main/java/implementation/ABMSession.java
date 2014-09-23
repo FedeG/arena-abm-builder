@@ -1,4 +1,4 @@
-package ar.com.abmFramework.def;
+package implementation;
 
 public interface ABMSession {
 	
