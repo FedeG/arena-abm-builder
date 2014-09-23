@@ -7,12 +7,13 @@ Framework for creating an ABM with Arena-UI framework
 
 
 
-Como usar:
+<h1>Como usar:</h1>
 
 Se necesita una clase que herede de ABMapplicationModel  (en donde van a ir las annotations de la interfaz de usuario), otra que herede de ABMbuilder (en donde solamente se define el new para especificar la clase del ApplicationModel).
 
 Para correrlo siempre va a ser necesario una del tipo
 
+```java
 public class TestApplication extends Application{
 
 	@SuppressWarnings("serial")
@@ -25,3 +26,4 @@ public class TestApplication extends Application{
 	public static void main(String[] args) {
 		new TestApplication().start();
 	}
+```
