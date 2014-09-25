@@ -1,5 +1,7 @@
 package implementation;
 
+import java.lang.annotation.Annotation;
+
 import org.uqbar.arena.bindings.NotNullObservable;
 import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.layout.VerticalLayout;
@@ -7,6 +9,8 @@ import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
+
+import annotations.visualWidgets.FieldText;
 
 
 @SuppressWarnings("serial")
@@ -59,6 +63,19 @@ public abstract class ABMbuilder extends SimpleWindow<ABMapplicationModel> {
 	}
 	
 	private void addTable(Panel componentPanel) {
+		Class modelClass = this.getModelObject().getClass();
+	
+		System.out.println(modelClass.getAnnotations().length);
+		System.out.println(modelClass.getAnnotationsByType(FieldText.class).length);
+		System.out.println(this.getModelObject().getClass().getDeclaredAnnotations().length);
+		System.out.println(this.getModelObject().getClass().getDeclaredAnnotationsByType(FieldText.class).length);
+
+		for (Annotation fieldText: modelClass.getAnnotations())
+			System.out.println(fieldText);
+		
+		for (Annotation fieldText2: modelClass.getAnnotationsByType(FieldText.class))
+			System.out.println(fieldText2.annotationType().getName());
+
 //		Table<Class> table = new Table<Class>(mainPanel, Class.class);
 //		table.setHeigth(:/);
 //		table.setWidth(:/);
