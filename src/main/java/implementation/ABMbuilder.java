@@ -1,101 +1,61 @@
 package implementation;
 
-import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 
-import org.uqbar.arena.bindings.NotNullObservable;
-import org.uqbar.arena.layout.HorizontalLayout;
-import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
-
-import annotations.visualWidgets.FieldText;
-
+import annotations.abm.AddMethod;
+import annotations.abm.Title;
 
 @SuppressWarnings("serial")
-public abstract class ABMbuilder extends SimpleWindow<ABMapplicationModel> {
+public abstract class ABMbuilder extends SimpleWindow<ObjectABM> {
 
-	
-	public ABMbuilder(WindowOwner parent, ABMapplicationModel model, String title) {
+	public ABMbuilder(WindowOwner parent, ObjectABM model) {
 		super(parent, model);
-		model.setWindowTitle(title);
+
 	}
 
-	@SuppressWarnings({ "unchecked" })
 	protected void addButtons(Panel actionsPanel) {
-		
-		new Button(actionsPanel)
-			.setCaption("Nuevo")
-			//.onClick(new addWindow(this, this.getModelObject()).open())
-			;
 
-		NotNullObservable elementSelected = new NotNullObservable("objectSelected");
-		
-		new Button(actionsPanel)
-			.setCaption("Editar")
-			.bindEnabled(elementSelected)
-			//.onClick(new editWindow(this, this.getModelObject().getObjectSelected()).open())
-			;
+		new Button(actionsPanel).setCaption("Nuevo");
 
-		new Button(actionsPanel)
-			.setCaption("Eliminar")
-			.bindEnabled(elementSelected)
-			//.onClick(new removeWindow(this, this.getModelObject().getObjectSelected()).open())
-			;
+		new Button(actionsPanel).setCaption("Editar");
+
+		new Button(actionsPanel).setCaption("Eliminar");
 
 	}
-	
+
 	@Override
 	protected void createMainTemplate(Panel mainPanel) {
 
-		mainPanel.setLayout(new VerticalLayout());
-		super.createMainTemplate(mainPanel);
-		
-		Panel componentPanel = new Panel(mainPanel);
-		componentPanel.setLayout(new HorizontalLayout());
-		this.addTable(componentPanel);
-		
-		Panel buttonsPanel = new Panel(componentPanel);
-		buttonsPanel.setLayout(new VerticalLayout());
-		this.addButtons(buttonsPanel);
+		// Pone el titulo sacado de la annotation
 
-	}
-	
-	private void addTable(Panel componentPanel) {
-		Class modelClass = this.getModelObject().getClass();
-	
-		System.out.println(modelClass.getAnnotations().length);
-		System.out.println(modelClass.getAnnotationsByType(FieldText.class).length);
-		System.out.println(this.getModelObject().getClass().getDeclaredAnnotations().length);
-		System.out.println(this.getModelObject().getClass().getDeclaredAnnotationsByType(FieldText.class).length);
+		ObjectABM objetoDeDominio = this.getModelObject();
 
-		for (Annotation fieldText: modelClass.getAnnotations())
-			System.out.println(fieldText);
-		
-		for (Annotation fieldText2: modelClass.getAnnotationsByType(FieldText.class))
-			System.out.println(fieldText2.annotationType().getName());
-
-//		Table<Class> table = new Table<Class>(mainPanel, Class.class);
-//		table.setHeigth(:/);
-//		table.setWidth(:/);
-//		table.bindItemsToProperty(Objects);
-//		table.bindValueToProperty("objectSeleccionado");
-//		
-//		for :
-//			
-//			new Column<Class>(table)
-//			.setTitle(Title)
-//			.setFixedSize(225)
-//			.bindContentsToProperty(Attr);
+		Title titleAnnotation = objetoDeDominio.getClass()
+				.getDeclaredAnnotation(Title.class);
+		this.setTitle(titleAnnotation.title());
 
 	}
 
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
-		this.setTitle((this.getModelObject()).getWindowTitle());
+		Class<? extends ObjectABM> claseDominio = this.getModelObject()
+				.getClass();
+
+		/*for (Method method : claseDominio.getMethods()) { //TODO: revisar el tema de las excepciones en este código
+
+			if (method.isAnnotationPresent(AddMethod.class))
+
+				new Button(mainPanel).setCaption("Nuevo").onClick(
+						() -> method.invoke(this, null));
+		}*/
 	}
-	
+
 	@Override
-	protected void addActions(Panel mainPanel) {}
+	protected void addActions(Panel mainPanel) {
+
+	}
 }
