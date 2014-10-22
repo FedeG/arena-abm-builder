@@ -6,6 +6,8 @@ import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
+import org.uqbar.lacar.ui.model.Action;
+
 import annotations.abm.AddMethod;
 import annotations.abm.Title;
 
@@ -42,20 +44,25 @@ public abstract class ABMbuilder extends SimpleWindow<ObjectABM> {
 
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
-		Class<? extends ObjectABM> claseDominio = this.getModelObject()
+		/*Class<? extends ObjectABM> claseDominio = this.getModelObject()
 				.getClass();
 
-		/*for (Method method : claseDominio.getMethods()) { //TODO: revisar el tema de las excepciones en este código
+		for (Method method : claseDominio.getMethods()) {
 
-			if (method.isAnnotationPresent(AddMethod.class))
-
+			if (method.isAnnotationPresent(AddMethod.class)) {
 				new Button(mainPanel).setCaption("Nuevo").onClick(
-						() -> method.invoke(this, null));
-		}*/
+						((Action) Exceptions.soften(() -> method.invoke(this, (Object[]) null))));
+			}
+
+		}
+*/
 	}
+
+	
 
 	@Override
 	protected void addActions(Panel mainPanel) {
 
 	}
 }
+
