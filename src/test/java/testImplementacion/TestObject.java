@@ -1,6 +1,7 @@
 package testImplementacion;
 
 import annotations.abm.Title;
+import annotations.visualWidgets.FieldCheck;
 import implementation.ObjectABM;
 
 @SuppressWarnings("serial")
@@ -8,7 +9,17 @@ import implementation.ObjectABM;
 public class TestObject extends ObjectABM {
 
 	
-	Integer numeroSerie;
+	@FieldCheck
+	public boolean descapotable;
+	
+	
+	public boolean isDescapotable() {
+		return descapotable;
+	}
+
+	public void setDescapotable(boolean descapotable) {
+		this.descapotable = descapotable;
+	}
 	
 
 }
