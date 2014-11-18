@@ -72,8 +72,46 @@ public abstract class ABMbuilder extends SimpleWindow<ObjectABM> {
 		 * 
 		 * }
 		 */
+		
+		for (Field campo : claseDominio.getDeclaredFields()) {
+			try {
+				System.out.println(claseDominio.getDeclaredField(campo.getName()));
+				if (campo.isAnnotationPresent(FieldCheck.class)) {
 
-		for (Field campo : claseDominio.getFields()) {			
+					Panel subPanel = new Panel(mainPanel);
+					subPanel.setLayout(new ColumnLayout(2));
+
+					new Label(subPanel).setText(campo.getName());
+					new CheckBox(subPanel).bindValueToProperty(campo.getName());
+
+				} else if (campo.isAnnotationPresent(FieldDate.class)) {
+
+					new Label(mainPanel).setText("Fecha");
+
+				} else if (campo.isAnnotationPresent(FieldList.class)) {
+
+					new Label(mainPanel).setText("Lista");
+
+				} else if (campo.isAnnotationPresent(FieldRadioSelector.class)) {
+
+					new Label(mainPanel).setText("Pick&Select");
+
+				} else if (campo.isAnnotationPresent(FieldText.class)) {
+
+					new Label(mainPanel).bindValueToProperty(campo.getName());
+
+				} else if (campo.isAnnotationPresent(FieldTime.class)) {
+
+					new Label(mainPanel).setText("Time");
+
+				}
+			} catch (NoSuchFieldException | SecurityException e) {
+				e.printStackTrace();
+			} 
+		}
+		
+
+		/*for (Field campo : claseDominio.getFields()) {			
 			if (campo.isAnnotationPresent(FieldCheck.class)) {
 
 				Panel subPanel = new Panel(mainPanel);
@@ -104,7 +142,7 @@ public abstract class ABMbuilder extends SimpleWindow<ObjectABM> {
 
 			}
 
-		}
+		}*/
 	}
 
 	@Override
