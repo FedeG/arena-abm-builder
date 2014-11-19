@@ -2,7 +2,6 @@ package implementation;
 
 import java.lang.reflect.Field;
 
-import org.eclipse.ui.internal.handlers.WizardHandler.New;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
