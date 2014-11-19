@@ -44,6 +44,7 @@ public class MainWindow extends SimpleWindow<ObjectABM> {
 	protected void crearTabla(Panel mainPanel) {
 
 		Table<?> tablaDePersistencia = new Table<>(mainPanel, domainClass);
+		tablaDePersistencia.bindValueToProperty("objetoSeleccionado");
 
 		Field[] domainFields = domainClass.getDeclaredFields();
 		for (Field field : domainFields) {

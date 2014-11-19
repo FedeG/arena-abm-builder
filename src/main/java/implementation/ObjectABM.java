@@ -11,7 +11,7 @@ import annotations.abm.Title;
 @Observable
 public class ObjectABM extends Entity {
 
-	public Set<ObjectABM> persistedElements = new LinkedHashSet<ObjectABM>();
+	public Set<Object> persistedElements = new LinkedHashSet<Object>();
 	public Object objetoSeleccionado;
 
 	public Class<?> modelClass;
@@ -25,23 +25,23 @@ public class ObjectABM extends Entity {
 			modelClass = model;
 			modelObject = modelClass.newInstance();
 
-		} catch (InstantiationException  e) {
+		} catch (InstantiationException e) {
 			e.printStackTrace();
-		}catch(  IllegalAccessException e){
+		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
+		Object test;
 
 	}
-
 	public boolean hasTitle() {
 		return modelClass.isAnnotationPresent(Title.class);
 	}
 
-	public Set<ObjectABM> getPersistedElements() {
+	public Set<Object> getPersistedElements() {
 		return persistedElements;
 	}
 
-	public void setPersistedElements(Set<ObjectABM> persistedElements) {
+	public void setPersistedElements(Set<Object> persistedElements) {
 		this.persistedElements = persistedElements;
 	}
 

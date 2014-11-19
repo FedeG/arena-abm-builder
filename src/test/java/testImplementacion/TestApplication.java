@@ -13,7 +13,7 @@ public class TestApplication extends Application {
 		try {
 			return new MainWindow(this,new ObjectABM(TestObject.class));
 		} catch (InstantiationException | IllegalAccessException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return null; 

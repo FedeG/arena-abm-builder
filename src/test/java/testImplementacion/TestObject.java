@@ -7,7 +7,8 @@ import annotations.visualWidgets.FieldCheck;
 public class TestObject {
 	
 	@FieldCheck
-	public boolean tienePatente;
+	public boolean tienePatente=true;
+	public String nombre="pepito";
 
 	public boolean isTienePatente() {
 		return tienePatente;
