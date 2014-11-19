@@ -1,17 +1,23 @@
 package testImplementacion;
 
-import implementation.ABMbuilder;
+import implementation.MainWindow;
+import implementation.ObjectABM;
 
 import org.uqbar.arena.Application;
 import org.uqbar.arena.windows.Window;
 
 public class TestApplication extends Application {
 
-	@SuppressWarnings("serial")
 	@Override
 	protected Window<?> createMainWindow() {
-		return new ABMbuilder(this, new TestObject()) {
-		};
+		try {
+			return new MainWindow(this,new ObjectABM(TestObject.class));
+		} catch (InstantiationException | IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null; 
+		
 	}
 
 	public static void main(String[] args) {
