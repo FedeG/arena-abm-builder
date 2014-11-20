@@ -10,7 +10,7 @@ import annotations.abm.Title;
 
 @Observable
 public class ObjectABM extends Entity {
-
+	
 	public Set<Object> persistedElements = new LinkedHashSet<Object>();
 	public Object objetoSeleccionado;
 
