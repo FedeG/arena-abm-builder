@@ -1,27 +1,18 @@
 package testImplementacion;
 
+import implementation.FWObject;
 import annotations.abm.Title;
 import annotations.visualWidgets.FieldCheck;
 import annotations.visualWidgets.FieldText;
 
 @Title(title = "Autos ABM")
-public class TestObject {
-	
-	public TestObject() {
-		this.setTienePatente(true);
-		this.setNombre("default");
-	}
-	
-	public TestObject(boolean tienePatente, String nombre) {
-		this.setTienePatente(tienePatente);
-		this.setNombre(nombre);
-	}
-	
+public class TestObject extends FWObject {
+
 	@FieldCheck
-	public boolean tienePatente=true;
-	
+	public boolean tienePatente;
+
 	@FieldText
-	private String nombre="pepito";
+	private String nombre;
 
 	public boolean isTienePatente() {
 		return tienePatente;
