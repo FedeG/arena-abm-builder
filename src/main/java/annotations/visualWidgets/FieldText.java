@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 @PrimitiveAnnotation()
 public @interface FieldText {
 	public boolean modifiable() default true;
-	public String name() default "";
+	public String name();
 }

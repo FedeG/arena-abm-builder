@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface FieldCheck {
 
-	public String name() default "";
 	public boolean modifiable() default true;
+	public String name();
 }

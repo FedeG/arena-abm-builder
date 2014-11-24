@@ -77,17 +77,18 @@ public class ABMApplicationModel extends Entity {
 	}
 
 	public Method generateGetter(Field field, FWObject instance) {
+		Method getter=null;
 		try {
-			return instance.getClass().getDeclaredMethod(
+			getter= instance.getClass().getDeclaredMethod(
 					"get"
 							+ field.getName().substring(0, 1).toUpperCase()
 							+ field.getName().substring(1,
-									field.getName().length()), (Class<?>) null);
+									field.getName().length()), (Class<?>[]) null);
 		} catch (NoSuchMethodException | SecurityException e) {
 
 			e.printStackTrace();
 		}
-		return null;
+		return getter;
 	}
 
 	// /--------------------------------S&G-----------------------------------------------/

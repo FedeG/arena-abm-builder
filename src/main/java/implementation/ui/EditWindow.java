@@ -53,10 +53,10 @@ public class EditWindow extends TransactionalDialog<FWObject> {
 					FieldCheck annotation = field
 							.getAnnotation(FieldCheck.class);
 
-					if (annotation.name() == "") {
-						new Label(panel).setText(annotation.name());
-					} else {
+					if (annotation.name() == null || annotation.name()=="") {
 						new Label(panel).setText(field.getName());
+					} else {
+						new Label(panel).setText(annotation.name());
 					}
 
 					if (field.getAnnotation(FieldCheck.class).modifiable()) {
@@ -79,10 +79,10 @@ public class EditWindow extends TransactionalDialog<FWObject> {
 
 					FieldText annotation = field.getAnnotation(FieldText.class);
 
-					if (annotation.name() == "") {
-						new Label(panel).setText(annotation.name());
-					} else {
+					if (annotation.name() == null || annotation.name()=="") {
 						new Label(panel).setText(field.getName());
+					} else {
+						new Label(panel).setText(annotation.name());
 					}
 
 					if (field.getAnnotation(FieldText.class).modifiable()) {
