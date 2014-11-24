@@ -8,13 +8,13 @@ import annotations.visualWidgets.FieldText;
 @Title(title = "Autos ABM")
 public class TestObject extends FWObject {
 
-	@FieldCheck
+	@FieldCheck(modifiable = false)
 	public boolean tienePatente;
 
-	@FieldText
+	@FieldText(modifiable = true)
 	private String nombre;
 
-	public boolean isTienePatente() {
+	public boolean getTienePatente() {
 		return tienePatente;
 	}
 

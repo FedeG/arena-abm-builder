@@ -7,8 +7,8 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-@PrimitiveAnnotation()
 public @interface FieldCheck {
 
-	public boolean valorBooleando() default false;
+	public String name() default "";
+	public boolean modifiable() default true;
 }

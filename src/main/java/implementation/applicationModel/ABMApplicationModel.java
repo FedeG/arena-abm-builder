@@ -2,8 +2,10 @@ package implementation.applicationModel;
 
 import implementation.FWObject;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.uqbar.commons.model.Entity;
 import org.uqbar.commons.utils.Observable;
@@ -13,7 +15,7 @@ import annotations.abm.Title;
 @Observable
 public class ABMApplicationModel extends Entity {
 
-	public Set<FWObject> persistedElements = new HashSet<FWObject>();
+	public List<FWObject> persistedElements = new ArrayList<FWObject>();
 	public FWObject objetoSeleccionado;
 
 	public Class<? extends FWObject> domainClass;
@@ -46,36 +48,55 @@ public class ABMApplicationModel extends Entity {
 		persistedElements.add(objToPersist);
 		refresh();
 	}
-	
-	
+
 	public void refresh() {
-		Set<FWObject> aux = new HashSet<FWObject>();
+		List<FWObject> aux = new ArrayList<FWObject>();
 		aux = persistedElements;
-		persistedElements = new HashSet<FWObject>();
+		persistedElements = new ArrayList<FWObject>();
 		persistedElements = aux;
 
 	}
-	public void cancelEdit(FWObject existingInstance, FWObject cloneInstance) {
+
+	public void acceptEdit(FWObject existingInstance, FWObject cloneInstance) {
 		persistedElements.remove(existingInstance);
 		persistedElements.add(cloneInstance);
 		objetoSeleccionado = cloneInstance;
-		
+
 	}
 
-	public void delete() {
-	 persistedElements.remove(objetoSeleccionado);
-	 objetoSeleccionado=null;
-	 refresh();
-		
+	public void delete(FWObject objetoABorrar) {
+		List<FWObject> aux = new ArrayList<FWObject>();
+		for (FWObject fwObject : persistedElements) {
+			if (!(fwObject == objetoABorrar)) {
+				aux.add(fwObject);
+			}
+		}
+		persistedElements = aux;
+		refresh();
+
+	}
+
+	public Method generateGetter(Field field, FWObject instance) {
+		try {
+			return instance.getClass().getDeclaredMethod(
+					"get"
+							+ field.getName().substring(0, 1).toUpperCase()
+							+ field.getName().substring(1,
+									field.getName().length()), (Class<?>) null);
+		} catch (NoSuchMethodException | SecurityException e) {
+
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	// /--------------------------------S&G-----------------------------------------------/
 
-	public Set<FWObject> getPersistedElements() {
+	public List<FWObject> getPersistedElements() {
 		return persistedElements;
 	}
 
-	public void setPersistedElements(Set<FWObject> persistedElements) {
+	public void setPersistedElements(List<FWObject> persistedElements) {
 		this.persistedElements = persistedElements;
 	}
 
@@ -102,6 +123,5 @@ public class ABMApplicationModel extends Entity {
 	public void getTableReferenceInstance(FWObject modelObject) {
 		this.tableReferenceInstance = modelObject;
 	}
-
 
 }

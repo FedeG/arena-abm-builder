@@ -9,4 +9,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @PrimitiveAnnotation()
 public @interface FieldText {
+	public boolean modifiable() default true;
+	public String name() default "";
 }

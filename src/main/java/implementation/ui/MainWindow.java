@@ -101,12 +101,12 @@ public class MainWindow extends SimpleWindow<ABMApplicationModel> {
 	}
 
 	public void eliminarObjeto() {
-		getModelObject().delete();
+		getModelObject().delete(getModelObject().objetoSeleccionado);
 
 	}
 
 	public void modificar() throws InstantiationException,
-			IllegalAccessException {
+			IllegalAccessException, CloneNotSupportedException {
 		modificarObjeto();
 	}
 
@@ -119,9 +119,8 @@ public class MainWindow extends SimpleWindow<ABMApplicationModel> {
 				.newDomainInstance()));
 	}
 
-	public void modificarObjeto() {
-		this.openDialog(new EditWindow(this, getModelObject(),
-				getModelObject().objetoSeleccionado));
+	public void modificarObjeto() throws CloneNotSupportedException {
+		this.openDialog(new EditWindow(this, getModelObject(),(FWObject) getModelObject().objetoSeleccionado.clone()));
 	}
 
 	protected void openDialog(Dialog<?> dialog) {
