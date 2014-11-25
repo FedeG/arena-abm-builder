@@ -1,5 +1,8 @@
 package testImplementacion;
 
+import java.lang.reflect.Method;
+import java.util.regex.Pattern;
+
 import implementation.FWObject;
 import annotations.abm.Title;
 import annotations.visualWidgets.FieldCheck;
@@ -9,10 +12,10 @@ import annotations.visualWidgets.FieldText;
 @Title(title = "Chofer ABM")
 public class Chofer extends FWObject {
 
-	@FieldText(modifiable = true, name = "Nombre del chofer")
+	@FieldText(name = "Nombre del chofer", validator="validateName")
 	private String nombre;
 
-	@FieldText(modifiable = true, name = "Domicilio del chofer")
+	@FieldText(name = "Domicilio del chofer", required=true)
 	private String domicilio;
 	
 	@FieldCheck(modifiable = false, name = "Tiene auto")
@@ -61,6 +64,11 @@ public class Chofer extends FWObject {
 
 	public void setTieneAuto(boolean tieneAuto) {
 		this.tieneAuto = tieneAuto;
+	}
+
+	public boolean validateName(String name){
+		String NAME_PATTERN = "^[a-zA-Z0-9_-]{1,20}$";
+		return Pattern.compile(NAME_PATTERN).matcher(name).matches();
 	}
 
 }

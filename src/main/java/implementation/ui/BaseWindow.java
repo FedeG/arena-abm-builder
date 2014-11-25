@@ -1,6 +1,7 @@
 package implementation.ui;
 
 import implementation.FWObject;
+import implementation.FWTextFilter;
 import implementation.applicationModel.ABMApplicationModel;
 
 import java.lang.reflect.Field;
@@ -44,13 +45,14 @@ public abstract class BaseWindow extends TransactionalDialog<FWObject> {
 	protected void createFormPanel(Panel mainPanel) {
 
 		this.setTitle(this.title);
+		new Label(mainPanel).setText("Los campos con * son requeridos");
 
 		try {
 			Field[] fields = existingInstance.getClass().getDeclaredFields();
 			for (Field field : fields) {
 
 				Panel panel = new Panel(mainPanel)
-						.setLayout(new ColumnLayout(2));
+						.setLayout(new ColumnLayout(3));
 
 				if (field.isAnnotationPresent(FieldCheck.class)) {
 
@@ -63,7 +65,8 @@ public abstract class BaseWindow extends TransactionalDialog<FWObject> {
 						new Label(panel).setText(annotation.name());
 					}
 
-					if ((field.getAnnotation(FieldCheck.class).modifiable() && this.editable) || this.editable_all) {
+					if ((field.getAnnotation(FieldCheck.class).modifiable() && this.editable)
+							|| this.editable_all) {
 						new CheckBox(panel)
 								.bindValueToProperty(field.getName());
 
@@ -89,9 +92,15 @@ public abstract class BaseWindow extends TransactionalDialog<FWObject> {
 						new Label(panel).setText(annotation.name());
 					}
 
-					if ((field.getAnnotation(FieldText.class).modifiable() && this.editable) || this.editable_all) {
-						new TextBox(panel).bindValueToProperty(field.getName());
-
+					if ((field.getAnnotation(FieldText.class).modifiable() && this.editable)
+							|| this.editable_all) {
+						TextBox text = new TextBox(panel);
+						text.bindValueToProperty(field.getName());
+							if (annotation.validator() != "")
+								try {
+									text.withFilter(new FWTextFilter(getModelObject().getClass()
+											.getMethod(annotation.validator(), String.class), instance));
+								} catch (NoSuchMethodException e) {}
 					} else {
 						Method getter = appModel.generateGetter(field,
 								existingInstance);
@@ -99,6 +108,7 @@ public abstract class BaseWindow extends TransactionalDialog<FWObject> {
 								existingInstance, (Object[]) null));
 
 					}
+					this.toRequired(annotation.required(), panel);
 				}
 				if (field.isAnnotationPresent(FieldSelector.class)) {
 
@@ -107,7 +117,8 @@ public abstract class BaseWindow extends TransactionalDialog<FWObject> {
 
 					new Label(panel).setText(annotation.name());
 
-					if ((field.getAnnotation(FieldSelector.class).modifiable() && this.editable) || this.editable_all) {
+					if ((field.getAnnotation(FieldSelector.class).modifiable() && this.editable)
+							|| this.editable_all) {
 						Selector<String> selector = new Selector<String>(panel);
 						selector.bindItemsToProperty(annotation.choices());
 						selector.bindValueToProperty(field.getName());
@@ -119,6 +130,7 @@ public abstract class BaseWindow extends TransactionalDialog<FWObject> {
 								existingInstance, (Object[]) null));
 
 					}
+					this.toRequired(annotation.required(), panel);
 
 				}
 
@@ -128,6 +140,11 @@ public abstract class BaseWindow extends TransactionalDialog<FWObject> {
 
 			e.printStackTrace();
 		}
+	}
+
+	private void toRequired(Boolean required, Panel panel) {
+		if (required)
+			new Label(panel).setText("*");
 	}
 
 	@Override

@@ -1,5 +1,10 @@
 package testImplementacion;
 
+import java.util.ArrayList;
+import java.util.regex.Pattern;
+
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+
 import implementation.FWObject;
 import annotations.abm.Title;
 import annotations.visualWidgets.FieldCheck;
@@ -9,10 +14,13 @@ import annotations.visualWidgets.FieldText;
 @Title(title = "Autos ABM")
 public class Auto extends FWObject {
 
-	@FieldText(modifiable = true, name = "Nombre del automotor")
+	@FieldText(name = "Nombre del automotor")
 	private String nombre;
 
-	@FieldCheck(modifiable = false, name = "Tiene patente")
+	@FieldText(name = "Patente del automotor", required=true, validator="validarPatente")
+	private String patente;
+	
+	@FieldCheck(name = "Tiene patente")
 	public boolean tienePatente;
 
 	@FieldSelector(choices = "provincias", modifiable = false, name = "Provincias")
@@ -52,4 +60,19 @@ public class Auto extends FWObject {
 		this.provincia = provincia;
 	}
 
+	public String getPatente() {
+		return patente;
+	}
+
+	public void setPatente(String patente) {
+		this.patente = patente;
+	}
+
+	public ArrayList<String> textos = new ArrayList<String>();
+	
+	public boolean validarPatente(String patente){
+		String PATENTE_PATTERN = "^[a-zA-Z]{0,3}[0-9]{0,3}$";
+		textos.add(patente);
+		return Pattern.compile(PATENTE_PATTERN).matcher(patente).matches();
+	}
 }
