@@ -9,6 +9,10 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface FieldCheck {
 
-	public boolean modifiable() default true;
-	public String name();
+	public String name() default ""; // Si se requiere un nombre
+	public String validator() default ""; //Nombre del método validador
+	public boolean required() default true; // Si el campo es requerido si o si
+	public boolean modifiable() default true; // Si el campo se puede modificar	
+	public boolean canFilter() default true; // Si se puede filtrar por este campo
+
 }

@@ -14,10 +14,12 @@ import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.CheckBox;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
+import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.WindowOwner;
 
 import annotations.visualWidgets.FieldCheck;
+import annotations.visualWidgets.FieldSelector;
 import annotations.visualWidgets.FieldText;
 
 public class EditWindow extends TransactionalDialog<FWObject> {
@@ -39,7 +41,7 @@ public class EditWindow extends TransactionalDialog<FWObject> {
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
 
-		this.setTitle("Agregar objeto nuevo");
+		this.setTitle("Editar objeto existente");
 
 		try {
 			Field[] fields = existingInstance.getClass().getDeclaredFields();
@@ -53,7 +55,7 @@ public class EditWindow extends TransactionalDialog<FWObject> {
 					FieldCheck annotation = field
 							.getAnnotation(FieldCheck.class);
 
-					if (annotation.name() == null || annotation.name()=="") {
+					if (annotation.name() == null || annotation.name() == "") {
 						new Label(panel).setText(field.getName());
 					} else {
 						new Label(panel).setText(annotation.name());
@@ -69,7 +71,7 @@ public class EditWindow extends TransactionalDialog<FWObject> {
 								existingInstance);
 
 						Boolean valor = (Boolean) getter.invoke(
-								existingInstance, (Object[])null);
+								existingInstance, (Object[]) null);
 						new Label(panel).setText((valor) ? "Si" : "No");
 
 					}
@@ -79,7 +81,7 @@ public class EditWindow extends TransactionalDialog<FWObject> {
 
 					FieldText annotation = field.getAnnotation(FieldText.class);
 
-					if (annotation.name() == null || annotation.name()=="") {
+					if (annotation.name() == null || annotation.name() == "") {
 						new Label(panel).setText(field.getName());
 					} else {
 						new Label(panel).setText(annotation.name());
@@ -92,9 +94,30 @@ public class EditWindow extends TransactionalDialog<FWObject> {
 						Method getter = appModel.generateGetter(field,
 								existingInstance);
 						new Label(panel).setText((String) getter.invoke(
-								existingInstance, (Object[])null));
+								existingInstance, (Object[]) null));
 
 					}
+				}
+				if (field.isAnnotationPresent(FieldSelector.class)) {
+
+					FieldSelector annotation = field
+							.getAnnotation(FieldSelector.class);
+
+					new Label(panel).setText(annotation.name());
+
+					if (field.getAnnotation(FieldSelector.class).modifiable()) {
+						Selector<String> selector = new Selector<String>(panel);
+						selector.bindItemsToProperty(annotation.choices());
+						selector.bindValueToProperty(field.getName());
+
+					} else {
+						Method getter = appModel.generateGetter(field,
+								existingInstance);
+						new Label(panel).setText((String) getter.invoke(
+								existingInstance, (Object[]) null));
+
+					}
+
 				}
 
 			}

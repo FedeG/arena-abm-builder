@@ -18,6 +18,8 @@ import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
 import annotations.abm.Title;
+import annotations.visualWidgets.FieldCheck;
+import annotations.visualWidgets.FieldText;
 
 public class MainWindow extends SimpleWindow<ABMApplicationModel> {
 
@@ -68,15 +70,10 @@ public class MainWindow extends SimpleWindow<ABMApplicationModel> {
 		modificar.setCaption("Modificar");
 		modificar.onClick(new MessageSend(this, "modificar")).setWidth(150);
 
-		Button ver = new Button(botons);
-		ver.setCaption("Ver");
-		ver.onClick(new MessageSend(this, "ver")).setWidth(150);
-
 		NotNullObservable elementSelected = new NotNullObservable(
 				"objetoSeleccionado");
 		eliminar.bindEnabled(elementSelected);
 		modificar.bindEnabled(elementSelected);
-		ver.bindEnabled(elementSelected);
 
 	}
 
@@ -87,11 +84,55 @@ public class MainWindow extends SimpleWindow<ABMApplicationModel> {
 		tablaDePersistencia.setHeigth(120).bindValueToProperty(
 				"objetoSeleccionado");
 		tablaDePersistencia.bindItemsToProperty("persistedElements");
+		
 
 		Field[] domainFields = getDomainClass().getDeclaredFields();
 		for (Field field : domainFields) {
-			new Column<>(tablaDePersistencia).setTitle(field.getName())
-					.bindContentsToProperty(field.getName());
+
+			try {
+				if (field.isAnnotationPresent(FieldCheck.class)) {
+
+					FieldCheck annotation = field
+							.getAnnotation(FieldCheck.class);
+
+					if (annotation.name() == null || annotation.name() == "") {
+
+						new Column<>(tablaDePersistencia)
+								.setTitle(field.getName())
+								.bindContentsToProperty(field.getName())
+								.setTitle(field.getName());
+					} else {
+						new Column<>(tablaDePersistencia)
+								.setTitle(field.getName())
+								.bindContentsToProperty(field.getName())
+								.setTitle(annotation.name());
+					}
+
+				}
+				if (field.isAnnotationPresent(FieldText.class)) {
+
+					FieldText annotation = field.getAnnotation(FieldText.class);
+
+					if (annotation.name() == null || annotation.name() == "") {
+
+						new Column<>(tablaDePersistencia)
+								.setTitle(field.getName())
+								.bindContentsToProperty(field.getName())
+								.setTitle(field.getName());
+
+					} else {
+						new Column<>(tablaDePersistencia)
+								.setTitle(field.getName())
+								.bindContentsToProperty(field.getName())
+								.setTitle(annotation.name());
+					}
+
+				}
+
+			} catch (IllegalArgumentException | SecurityException e) {
+
+				e.printStackTrace();
+			}
 
 		}
 	}
@@ -120,7 +161,8 @@ public class MainWindow extends SimpleWindow<ABMApplicationModel> {
 	}
 
 	public void modificarObjeto() throws CloneNotSupportedException {
-		this.openDialog(new EditWindow(this, getModelObject(),(FWObject) getModelObject().objetoSeleccionado.clone()));
+		this.openDialog(new EditWindow(this, getModelObject(),
+				(FWObject) getModelObject().objetoSeleccionado.clone()));
 	}
 
 	protected void openDialog(Dialog<?> dialog) {
