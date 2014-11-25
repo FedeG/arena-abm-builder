@@ -70,10 +70,15 @@ public class MainWindow extends SimpleWindow<ABMApplicationModel> {
 		modificar.setCaption("Modificar");
 		modificar.onClick(new MessageSend(this, "modificar")).setWidth(150);
 
+		Button ver = new Button(botons);
+		ver.setCaption("Ver");
+		ver.onClick(new MessageSend(this, "ver")).setWidth(150);
+		
 		NotNullObservable elementSelected = new NotNullObservable(
 				"objetoSeleccionado");
 		eliminar.bindEnabled(elementSelected);
 		modificar.bindEnabled(elementSelected);
+		ver.bindEnabled(elementSelected);
 
 	}
 
@@ -151,8 +156,13 @@ public class MainWindow extends SimpleWindow<ABMApplicationModel> {
 		modificarObjeto();
 	}
 
+	public void ver() throws InstantiationException,
+		IllegalAccessException, CloneNotSupportedException {
+		verObjeto();
+	}
+	
 	public void agregar() throws InstantiationException, IllegalAccessException {
-		agregarObjeto();// Acá verificamos si hay un addMethod
+		agregarObjeto();
 	}
 
 	public void agregarObjeto() {
@@ -165,6 +175,11 @@ public class MainWindow extends SimpleWindow<ABMApplicationModel> {
 				(FWObject) getModelObject().objetoSeleccionado.clone()));
 	}
 
+	public void verObjeto() throws CloneNotSupportedException {
+		this.openDialog(new ViewWindow(this, getModelObject(),
+				(FWObject) getModelObject().objetoSeleccionado.clone()));
+	}
+	
 	protected void openDialog(Dialog<?> dialog) {
 		dialog.onAccept(new MessageSend(this.getModelObject(), "refresh"));
 		dialog.onCancel(new MessageSend(this.getModelObject(), "refresh"));
