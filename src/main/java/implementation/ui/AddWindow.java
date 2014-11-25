@@ -12,8 +12,7 @@ public class AddWindow extends BaseWindow {
 		super(owner, applicationModel, nwInstance);
 		this.title = "Agregar objeto nuevo";
 		this.editable_all = true;
-		this.editable = true;
-		this.existingInstance = this.instance; 
+		this.existingInstance = this.instance;
 	}
 
 	@Override
