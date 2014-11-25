@@ -6,6 +6,7 @@ import implementation.applicationModel.ABMApplicationModel;
 import java.lang.reflect.Field;
 
 import org.uqbar.arena.actions.MessageSend;
+import org.uqbar.arena.aop.windows.TransactionalDialog;
 import org.uqbar.arena.bindings.NotNullObservable;
 import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.layout.VerticalLayout;
@@ -14,14 +15,13 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
-import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
 import annotations.abm.Title;
 import annotations.visualWidgets.FieldCheck;
 import annotations.visualWidgets.FieldText;
 
-public class MainWindow extends SimpleWindow<ABMApplicationModel> {
+public class MainWindow extends TransactionalDialog<ABMApplicationModel> {
 
 	private Class<? extends FWObject> domainClass;
 
@@ -73,7 +73,7 @@ public class MainWindow extends SimpleWindow<ABMApplicationModel> {
 		Button ver = new Button(botons);
 		ver.setCaption("Ver");
 		ver.onClick(new MessageSend(this, "ver")).setWidth(150);
-		
+
 		NotNullObservable elementSelected = new NotNullObservable(
 				"objetoSeleccionado");
 		eliminar.bindEnabled(elementSelected);
@@ -89,7 +89,6 @@ public class MainWindow extends SimpleWindow<ABMApplicationModel> {
 		tablaDePersistencia.setHeigth(120).bindValueToProperty(
 				"objetoSeleccionado");
 		tablaDePersistencia.bindItemsToProperty("persistedElements");
-		
 
 		Field[] domainFields = getDomainClass().getDeclaredFields();
 		for (Field field : domainFields) {
@@ -156,11 +155,11 @@ public class MainWindow extends SimpleWindow<ABMApplicationModel> {
 		modificarObjeto();
 	}
 
-	public void ver() throws InstantiationException,
-		IllegalAccessException, CloneNotSupportedException {
+	public void ver() throws InstantiationException, IllegalAccessException,
+			CloneNotSupportedException {
 		verObjeto();
 	}
-	
+
 	public void agregar() throws InstantiationException, IllegalAccessException {
 		agregarObjeto();
 	}
@@ -179,7 +178,7 @@ public class MainWindow extends SimpleWindow<ABMApplicationModel> {
 		this.openDialog(new ViewWindow(this, getModelObject(),
 				(FWObject) getModelObject().objetoSeleccionado.clone()));
 	}
-	
+
 	protected void openDialog(Dialog<?> dialog) {
 		dialog.onAccept(new MessageSend(this.getModelObject(), "refresh"));
 		dialog.onCancel(new MessageSend(this.getModelObject(), "refresh"));
