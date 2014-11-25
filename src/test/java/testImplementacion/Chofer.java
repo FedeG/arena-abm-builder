@@ -67,7 +67,7 @@ public class Chofer extends FWObject {
 	}
 
 	public boolean validateName(String name){
-		String NAME_PATTERN = "^[a-zA-Z0-9_-]{1,20}$";
+		String NAME_PATTERN = "^[a-zA-Z]{0,20}$";
 		return Pattern.compile(NAME_PATTERN).matcher(name).matches();
 	}
 
