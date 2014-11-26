@@ -1,10 +1,14 @@
 package implementation.ui;
 
+
 import implementation.FWObject;
 import implementation.applicationModel.ABMApplicationModel;
 
 import org.uqbar.arena.windows.WindowOwner;
 
+import annotations.abm.Title;
+
+@SuppressWarnings("serial")
 public class AddWindow extends BaseWindow {
 
 	public AddWindow(WindowOwner owner, ABMApplicationModel applicationModel,
@@ -17,6 +21,7 @@ public class AddWindow extends BaseWindow {
 
 	@Override
 	protected void executeTask() {
+		this.execMethodOfInstance(instance.getClass().getAnnotation(Title.class).addMethod());
 		appModel.persist(instance);
 		super.executeTask();
 	}

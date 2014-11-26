@@ -5,6 +5,7 @@ import implementation.applicationModel.ABMApplicationModel;
 
 import org.uqbar.arena.windows.WindowOwner;
 
+@SuppressWarnings("serial")
 public class ViewWindow extends BaseWindow {
 
 	public ViewWindow(WindowOwner owner,
