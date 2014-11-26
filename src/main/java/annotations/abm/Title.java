@@ -12,4 +12,5 @@ public @interface Title {
 	String addMethod() default "";
 	String editMethod() default "";
 	String removeMethod() default "";
+	String getInitialMethod() default "";
 }

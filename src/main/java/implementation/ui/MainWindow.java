@@ -6,6 +6,7 @@ import implementation.applicationModel.ABMApplicationModel;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 
 import org.uqbar.arena.actions.MessageSend;
 import org.uqbar.arena.aop.windows.TransactionalDialog;
@@ -87,12 +88,12 @@ public class MainWindow extends TransactionalDialog<ABMApplicationModel> {
 
 	protected void crearTabla(Panel mainPanel) {
 
-		Table<? extends FWObject> tablaDePersistencia = new Table<>(mainPanel,
-				domainClass);
-		tablaDePersistencia.setHeigth(120).bindValueToProperty(
-				"objetoSeleccionado");
+		Table<? extends FWObject> tablaDePersistencia = new Table<>(mainPanel,domainClass);
+		tablaDePersistencia.setHeigth(120).bindValueToProperty("objetoSeleccionado");
 		tablaDePersistencia.bindItemsToProperty("persistedElements");
-
+		
+		this.getInitialTableData();
+		
 		Field[] domainFields = getDomainClass().getDeclaredFields();
 		for (Field field : domainFields) {
 
@@ -141,6 +142,21 @@ public class MainWindow extends TransactionalDialog<ABMApplicationModel> {
 				e.printStackTrace();
 			}
 
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private void getInitialTableData() {
+		FWObject instance;
+		try {
+			instance = (FWObject) getDomainClass().newInstance();
+			String nameInitialMethod = instance.getClass().getAnnotation(Title.class).getInitialMethod();
+			if (!nameInitialMethod.equalsIgnoreCase("")){
+				Method edit = instance.getClass().getMethod(nameInitialMethod);
+				getModelObject().persistedElements = (List<FWObject>) edit.invoke(instance);
+			}
+		} catch (NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
 		}
 	}
 
