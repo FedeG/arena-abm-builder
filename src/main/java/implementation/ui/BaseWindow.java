@@ -149,7 +149,7 @@ public abstract class BaseWindow extends TransactionalDialog<FWObject> {
 	}
 
 	public void execMethodOfInstance(String methodName){
-		if (methodName != "")
+		if (!methodName.equalsIgnoreCase(""))
 			try {
 				Method edit = instance.getClass().getMethod(methodName, instance.getClass());
 				edit.invoke(instance, instance);

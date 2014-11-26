@@ -146,19 +146,20 @@ public class MainWindow extends TransactionalDialog<ABMApplicationModel> {
 
 	public void eliminar() {
 		FWObject instance = getModelObject().objetoSeleccionado;
-		String methodName = instance.getClass()
-				.getAnnotation(Title.class).removeMethod();
-		if (methodName != "")
+		this.execMethodOfInstance(instance.getClass().getAnnotation(Title.class).removeMethod(), instance);
+		getModelObject().delete(getModelObject().objetoSeleccionado);
+	}
+	
+	public void execMethodOfInstance(String methodName, FWObject instance){
+		if (!methodName.equalsIgnoreCase(""))
 			try {
 				Method edit = instance.getClass().getMethod(methodName, instance.getClass());
 				edit.invoke(instance, instance);
-			} catch (NoSuchMethodException | SecurityException
-					| IllegalAccessException | IllegalArgumentException
-					| InvocationTargetException e) {
+			} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 				e.printStackTrace();
 			}
-		getModelObject().delete(getModelObject().objetoSeleccionado);
 	}
+
 
 	public void modificar() throws InstantiationException,
 			IllegalAccessException, CloneNotSupportedException {
