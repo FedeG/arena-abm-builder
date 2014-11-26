@@ -10,6 +10,7 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
+@SuppressWarnings("serial")
 public class MultiMainWindow extends SimpleWindow<MultiABMApplicationModel> {
 
 	public MultiMainWindow(WindowOwner parent,

@@ -3,14 +3,13 @@ package testImplementacion;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
-
 import implementation.FWObject;
 import annotations.abm.Title;
 import annotations.visualWidgets.FieldCheck;
 import annotations.visualWidgets.FieldSelector;
 import annotations.visualWidgets.FieldText;
 
+@SuppressWarnings("serial")
 @Title(title = "Autos ABM")
 public class Auto extends FWObject {
 

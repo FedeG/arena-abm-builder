@@ -13,6 +13,7 @@ import org.uqbar.commons.utils.Observable;
 import annotations.abm.Title;
 
 @Observable
+@SuppressWarnings("serial")
 public class ABMApplicationModel extends Entity {
 
 	public List<FWObject> persistedElements = new ArrayList<FWObject>();
