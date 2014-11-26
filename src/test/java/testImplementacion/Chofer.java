@@ -27,8 +27,7 @@ public class Chofer extends FWObject {
 
 	@FieldSelector(choices = "provincias", modifiable = false, name = "Provincias")
 	public String provincia;
-	String[] provincias = { "Buenos Aires", "Cordoba", "La Rioja", "Chaco",
-			"Catamarca" };
+	String[] provincias = { "Buenos Aires", "Cordoba", "La Rioja", "Chaco", "Catamarca" };
 
 	public String[] getProvincias() {
 		return provincias;
@@ -96,17 +95,14 @@ public class Chofer extends FWObject {
 
 	public void loggeo(String texto){
 		 Logger logger = Logger.getLogger("ChoferLog");  
-		 FileHandler fh;  
-
+		 FileHandler fh;
 		try {
-		fh = new FileHandler("/tmp/choferes.log");
+			fh = new FileHandler("/tmp/choferes.log");
 			logger.addHandler(fh);
 			SimpleFormatter formatter = new SimpleFormatter();
 			fh.setFormatter(formatter);
 			logger.info(texto);
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (SecurityException | IOException e) {
 			e.printStackTrace();
 		}
 	}

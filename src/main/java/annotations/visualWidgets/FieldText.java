@@ -7,9 +7,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-@PrimitiveAnnotation()
 public @interface FieldText {
-	
 	public String name() default ""; // Si se requiere un nombre
 	public String validator() default ""; //Nombre del método validador
 	public boolean required() default true; // Si el campo es requerido si o si

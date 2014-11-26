@@ -35,9 +35,7 @@ public class MainWindow extends TransactionalDialog<ABMApplicationModel> {
 	}
 
 	@Override
-	protected void addActions(Panel actionsPanel) {
-
-	}
+	protected void addActions(Panel actionsPanel) {}
 
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
@@ -78,8 +76,7 @@ public class MainWindow extends TransactionalDialog<ABMApplicationModel> {
 		ver.setCaption("Ver");
 		ver.onClick(new MessageSend(this, "ver")).setWidth(150);
 
-		NotNullObservable elementSelected = new NotNullObservable(
-				"objetoSeleccionado");
+		NotNullObservable elementSelected = new NotNullObservable("objetoSeleccionado");
 		eliminar.bindEnabled(elementSelected);
 		modificar.bindEnabled(elementSelected);
 		ver.bindEnabled(elementSelected);
@@ -149,13 +146,13 @@ public class MainWindow extends TransactionalDialog<ABMApplicationModel> {
 	private void getInitialTableData() {
 		FWObject instance;
 		try {
-			instance = (FWObject) getDomainClass().newInstance();
+			instance = (FWObject) getModelObject().newDomainInstance();
 			String nameInitialMethod = instance.getClass().getAnnotation(Title.class).getInitialMethod();
 			if (!nameInitialMethod.equalsIgnoreCase("")){
 				Method edit = instance.getClass().getMethod(nameInitialMethod);
 				getModelObject().persistedElements = (List<FWObject>) edit.invoke(instance);
 			}
-		} catch (NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+		} catch (NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
 	}

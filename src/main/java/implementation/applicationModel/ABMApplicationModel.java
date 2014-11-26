@@ -24,9 +24,7 @@ public class ABMApplicationModel extends Entity {
 
 	// Constructor
 	public ABMApplicationModel(Class<? extends FWObject> domClass) {
-
 		domainClass = domClass;
-
 		tableReferenceInstance = newDomainInstance();
 	}
 
@@ -39,7 +37,6 @@ public class ABMApplicationModel extends Entity {
 		try {
 			newInstance = domainClass.newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
-
 			e.printStackTrace();
 		}
 		return newInstance;
@@ -55,44 +52,36 @@ public class ABMApplicationModel extends Entity {
 		aux = persistedElements;
 		persistedElements = new ArrayList<FWObject>();
 		persistedElements = aux;
-
 	}
 
 	public void acceptEdit(FWObject existingInstance, FWObject cloneInstance) {
 		persistedElements.remove(existingInstance);
 		persistedElements.add(cloneInstance);
 		objetoSeleccionado = cloneInstance;
-
 	}
 
 	public void delete(FWObject objetoABorrar) {
 		List<FWObject> aux = new ArrayList<FWObject>();
-		for (FWObject fwObject : persistedElements) {
-			if (!(fwObject == objetoABorrar)) {
+		for (FWObject fwObject : persistedElements)
+			if (!fwObject.equals(objetoABorrar))
 				aux.add(fwObject);
-			}
-		}
 		persistedElements = aux;
 		refresh();
 
 	}
 
 	public Method generateGetter(Field field, FWObject instance) {
-		Method getter=null;
+		Method getter = null;
 		try {
-			getter= instance.getClass().getDeclaredMethod(
-					"get"
+			getter = instance.getClass().getDeclaredMethod("get"
 							+ field.getName().substring(0, 1).toUpperCase()
-							+ field.getName().substring(1,
-									field.getName().length()), (Class<?>[]) null);
+							+ field.getName().substring(1,field.getName().length()),
+							(Class<?>[]) null);
 		} catch (NoSuchMethodException | SecurityException e) {
-
 			e.printStackTrace();
 		}
 		return getter;
 	}
-
-	// /--------------------------------S&G-----------------------------------------------/
 
 	public List<FWObject> getPersistedElements() {
 		return persistedElements;
