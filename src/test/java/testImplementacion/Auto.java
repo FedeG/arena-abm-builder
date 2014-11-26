@@ -26,6 +26,9 @@ public class Auto extends FWObject {
 	@FieldText(name = "Nombre del automotor")
 	private String nombre;
 
+	@FieldText(name = "Modelo del automotor", fwValidator="validateNumbers")
+	private String modelo;
+
 	@FieldText(name = "Patente del automotor", required=true, validator="validarPatente")
 	private String patente;
 	
@@ -88,5 +91,13 @@ public class Auto extends FWObject {
 		autos.add(new Auto("Ford Ka", "ERD123", "Chaco", true));
 		autos.add(new Auto("Volkswagen Gol", "", "La Rioja", false));
 		return autos; 
+	}
+
+	public String getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
 	}
 }

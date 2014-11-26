@@ -19,6 +19,7 @@ import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.WindowOwner;
 
+import annotations.abm.Validator;
 import annotations.visualWidgets.FieldCheck;
 import annotations.visualWidgets.FieldSelector;
 import annotations.visualWidgets.FieldText;
@@ -97,10 +98,13 @@ public abstract class BaseWindow extends TransactionalDialog<FWObject> {
 							|| this.editable_all) {
 						TextBox text = new TextBox(panel);
 						text.bindValueToProperty(field.getName());
-							if (annotation.validator() != "")
+							if (!annotation.validator().equalsIgnoreCase("") || !annotation.fwValidator().equalsIgnoreCase(""))
 								try {
-									text.withFilter(new FWTextFilter(getModelObject().getClass()
-											.getMethod(annotation.validator(), String.class), instance));
+									if (!annotation.validator().equalsIgnoreCase(""))
+										text.withFilter(new FWTextFilter(getModelObject().getClass()
+												.getMethod(annotation.validator(), String.class), instance));
+									else text.withFilter(new FWTextFilter(Validator.class
+											.getMethod(annotation.fwValidator(), String.class), new Validator()));
 								} catch (NoSuchMethodException e) {}
 					} else {
 						Method getter = appModel.generateGetter(field,

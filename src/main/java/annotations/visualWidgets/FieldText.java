@@ -13,5 +13,7 @@ public @interface FieldText {
 	public boolean required() default true; // Si el campo es requerido si o si
 	public boolean modifiable() default true; // Si el campo se puede modificar	
 	public boolean canFilter() default true; // Si se puede filtrar por este campo
-
+	public String fwValidator() default ""; //Nombre del método validador definido en el FW
 }
+
+
