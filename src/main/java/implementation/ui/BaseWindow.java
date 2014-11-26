@@ -23,6 +23,7 @@ import annotations.visualWidgets.FieldCheck;
 import annotations.visualWidgets.FieldSelector;
 import annotations.visualWidgets.FieldText;
 
+@SuppressWarnings("serial")
 public abstract class BaseWindow extends TransactionalDialog<FWObject> {
 
 	FWObject existingInstance;
@@ -145,6 +146,16 @@ public abstract class BaseWindow extends TransactionalDialog<FWObject> {
 	private void toRequired(Boolean required, Panel panel) {
 		if (required)
 			new Label(panel).setText("*");
+	}
+
+	public void execMethodOfInstance(String methodName){
+		if (methodName != "")
+			try {
+				Method edit = instance.getClass().getMethod(methodName, instance.getClass());
+				edit.invoke(instance, instance);
+			} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+				e.printStackTrace();
+			}
 	}
 
 	@Override
