@@ -9,5 +9,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface Title {
 	String title() default "ABM";
-
+	String addMethod() default "";
+	String editMethod() default "";
+	String removeMethod() default "";
 }
