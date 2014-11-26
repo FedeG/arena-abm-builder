@@ -4,6 +4,8 @@ import implementation.FWObject;
 import implementation.applicationModel.ABMApplicationModel;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import org.uqbar.arena.actions.MessageSend;
 import org.uqbar.arena.aop.windows.TransactionalDialog;
@@ -21,6 +23,7 @@ import annotations.abm.Title;
 import annotations.visualWidgets.FieldCheck;
 import annotations.visualWidgets.FieldText;
 
+@SuppressWarnings("serial")
 public class MainWindow extends TransactionalDialog<ABMApplicationModel> {
 
 	private Class<? extends FWObject> domainClass;
@@ -142,12 +145,19 @@ public class MainWindow extends TransactionalDialog<ABMApplicationModel> {
 	}
 
 	public void eliminar() {
-		eliminarObjeto();
-	}
-
-	public void eliminarObjeto() {
+		FWObject instance = getModelObject().objetoSeleccionado;
+		String methodName = instance.getClass()
+				.getAnnotation(Title.class).removeMethod();
+		if (methodName != "")
+			try {
+				Method edit = instance.getClass().getMethod(methodName, instance.getClass());
+				edit.invoke(instance, instance);
+			} catch (NoSuchMethodException | SecurityException
+					| IllegalAccessException | IllegalArgumentException
+					| InvocationTargetException e) {
+				e.printStackTrace();
+			}
 		getModelObject().delete(getModelObject().objetoSeleccionado);
-
 	}
 
 	public void modificar() throws InstantiationException,
