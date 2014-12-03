@@ -8,9 +8,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface FieldCheck {
-
 	public String name() default ""; // Si se requiere un nombre
 	public boolean modifiable() default true; // Si el campo se puede modificar	
-	public boolean canFilter() default true; // Si se puede filtrar por este campo
-
 }

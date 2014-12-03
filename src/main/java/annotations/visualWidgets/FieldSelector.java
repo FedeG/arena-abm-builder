@@ -8,10 +8,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface FieldSelector {
-	public String name() ; // Si se requiere un nombre	
+	public String name() default ""; // Si se requiere un nombre	
 	public String choices(); //Nombre del método que le da sus opciones 
 	public boolean required() default true; // Si el campo es requerido si o si
 	public boolean modifiable() default true; // Si el campo se puede modificar	
-	public boolean canFilter() default true; // Si se puede filtrar por este campo
-
 }
