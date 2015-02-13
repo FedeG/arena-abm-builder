@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Arena-abm-builder : Framework for create desktop interface for ABM with Arena framework">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Arena-abm-builder</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/FedeG/arena-abm-builder">View on GitHub</a>
+
+          <h1 id="project_title">Arena-abm-builder</h1>
+          <h2 id="project_tagline">Framework for create desktop interface for ABM with Arena framework</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/FedeG/arena-abm-builder/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/FedeG/arena-abm-builder/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="arena-abm-builder" class="anchor" href="#arena-abm-builder" aria-hidden="true"><span class="octicon octicon-link"></span></a>Arena ABM Builder</h1>
+
+<p>Framework for creating an ABM with Arena-UI framework</p>
+
+<h2>
+<a id="requerimientos" class="anchor" href="#requerimientos" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requerimientos:</h2>
+
+<ul>
+<li>JRE 1.8 o superior</li>
+<li>Maven 3</li>
+<li>Arena Framework</li>
+</ul>
+
+<h2>
+<a id="contenido-del-framework" class="anchor" href="#contenido-del-framework" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contenido del framework:</h2>
+
+<ul>
+<li>
+<strong>TestImplementacion/Auto</strong>: Clase de ejemplo para demostracion del framework.</li>
+<li>
+<strong>TestImplementacion/Chofer</strong>: Clase de ejemplo para demostracion del framework.</li>
+<li>
+<strong>TestImplementacion/TestSimpleApplication</strong>: Applicacion que usa el ABM para la clase Auto.</li>
+<li><p><strong>TestImplementacion/TestApplication</strong>: Aplicacion que usa la multiABM con la clase Auto y Chofer.</p></li>
+<li>
+<p><strong>annotations.abm/Title</strong>: annotation para la clase con la cual queremos trabajar en el ABM. Sus parametros son:</p>
+
+<ul>
+<li>
+<strong>title</strong>: titulo del ABM, su valor default es "ABM" </li>
+<li>
+<strong>addMethod</strong>: Nombre del metodo que la clase contiene para cuando se agrega un elemento en el ABM, su valor default es "";</li>
+<li>
+<strong>editMethod</strong>: Nombre del metodo que la clase contiene para cuando se modifica un elemento en el ABM, su valor default es "";</li>
+<li>
+<strong>removeMethod</strong>: Nombre del metodo que la clase contiene para cuando se elimina un elemento en el ABM, su valor default es "";</li>
+<li>
+<strong>getInitialMethod</strong>: Nombre del metodo que la clase contiene para cuando se abre el ABM y se cargan los datos iniciales, su valor default es "";</li>
+</ul>
+</li>
+<li>
+<p><strong>annotations.abm/Validator</strong>: Esta clase nos da los validadores predefinidos y usuales. Estos validadores son:</p>
+
+<ul>
+<li>
+<strong>validateUserName</strong>: Valida que el dato ingresado sea con numeros, letras, _ o - y que no supere los 15 caracteres.</li>
+<li>
+<strong>validateNotNumbersUnlimited</strong>: Valida que el dato ingresado sea solo con letras y sin limite</li>
+<li>
+<strong>validateNotNumbersLimited</strong>: Valida que el dato ingresado sea solo con letras y que no supere los 30 caracteres.</li>
+<li>
+<strong>validateNumbers</strong>: Valida que el dato ingresado sea solo con numeros y sin limite.</li>
+</ul>
+</li>
+<li>
+<p><strong>annotations.visualWidgets/FieldCheck</strong>: annotations de atributo para atributos Boolean, sus parametros pueden ser:</p>
+
+<ul>
+<li>
+<strong>name</strong>: Nombre para mostrar e indicar que es este atributo, su valor default es ""</li>
+<li>
+<strong>modifiable</strong>: Indica si se puede modificar, su valor default es True</li>
+</ul>
+</li>
+<li>
+<p><strong>annotations.visualWidgets/FieldText</strong>: annotations de atributo para atributos String</p>
+
+<ul>
+<li>
+<strong>name</strong>: Nombre para mostrar e indicar que es este atributo, su valor default es ""</li>
+<li>
+<strong>modifiable</strong>: Indica si se puede modificar, su valor default es True</li>
+<li>
+<strong>required</strong>: Indica si el atributo es requerido si o si, su valor default es False</li>
+<li>
+<strong>validator</strong>: Nombre del validador dentro de la clase para este atributo , su valor default es ""</li>
+<li>
+<strong>fwValidator</strong>: Nombre del validador predefinido por el framework, su valor default es ""</li>
+</ul>
+</li>
+<li>
+<p><strong>annotations.visualWidgets/FieldSelect</strong>: annotations de atributo para atributos String y con opciones listadas </p>
+
+<ul>
+<li>
+<strong>name</strong>: Nombre para mostrar e indicar que es este atributo, su valor default es ""</li>
+<li>
+<strong>modifiable</strong>: Indica si se puede modificar, su valor default es True</li>
+<li>
+<strong>required</strong>: Indica si el atributo es requerido si o si, su valor default es False</li>
+<li>
+<strong>choices</strong>: Nombre del atributo donde esta la lista de datos posibles para ese atributo.</li>
+</ul>
+</li>
+<li><p><strong>implementation.ui/MainWindow</strong>: Clase que nos permite crear una ABM para una clase</p></li>
+<li>
+<strong>implementation.ui/MultiMainWindow</strong>: Clase que nos permite crear una ABM de multiples clases.</li>
+</ul>
+
+<h2>
+<a id="manual-de-usuario-y-ejemplos-de-uso" class="anchor" href="#manual-de-usuario-y-ejemplos-de-uso" aria-hidden="true"><span class="octicon octicon-link"></span></a>Manual de Usuario y ejemplos de uso:</h2>
+
+<p>Antes de comenzar, hay que saber para que se utiliza este framework y que facilidades nos da.
+Este framework es para la creación automatica de una interfaz de usuario con funcionalidad de ABM para cualquier tipo de Entidad.</p>
+
+<h2>
+<a id="ejemplo-de-uso-para-una-clase" class="anchor" href="#ejemplo-de-uso-para-una-clase" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ejemplo de uso para una Clase:</h2>
+
+<p>En este caso procederemos a crear un ABM de una clase Auto.</p>
+
+<p>Para este ejemplo partimos de una clase con el siguiente codigo:</p>
+
+<div class="highlight highlight-java"><pre><span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">Auto</span> {
+
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> nombre;
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> modelo;
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> patente;
+    <span class="pl-s">public</span> <span class="pl-st">boolean</span> tienePatente;
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> provincia;
+
+}</pre></div>
+
+<p>Para poder crear una ABM de esta clase, el framework provee una clase llamada FWObject de la cual la clase Auto tiene que heredar.
+Entonces la clase Auto queda con el siguiento codigo:</p>
+
+<div class="highlight highlight-java"><pre><span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">Auto</span> <span class="pl-s">extends</span> <span class="pl-e">FWObject</span> {
+
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> nombre;
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> modelo;
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> patente;
+    <span class="pl-s">public</span> <span class="pl-st">boolean</span> tienePatente;
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> provincia;
+
+}</pre></div>
+
+<p>Para que Auto sea una clase que el ABM pueda comprender hay que agragar el annotation Title.
+En este caso vamos a agregar que el ABM tenga el titulo "Autos ABM"</p>
+
+<div class="highlight highlight-java"><pre>@Title(title <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Autos ABM<span class="pl-pds">"</span></span>)
+<span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">Auto</span> <span class="pl-s">extends</span> <span class="pl-e">FWObject</span> {
+
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> nombre;
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> modelo;
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> patente;
+    <span class="pl-s">public</span> <span class="pl-st">boolean</span> tienePatente;
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> provincia;
+
+}</pre></div>
+
+<p>Una vez creado esto podemos empezar a agregar annotation para los atributos.
+En este caso vamos a agregar los siguiente annotation:</p>
+
+<ul>
+<li>
+<strong>FieldText</strong> para los atributos de tipo String</li>
+<li>
+<strong>FieldCheck</strong> para los atributos de tipo Boolean</li>
+<li>
+<strong>FieldSelector</strong> para los atributos de tipo String que tengan opciones definidas</li>
+</ul>
+
+<p>Con lo que el codigo de Auto queda de la siguiente forma:</p>
+
+<div class="highlight highlight-java"><pre>@Title(title <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Autos ABM<span class="pl-pds">"</span></span>)
+<span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">Auto</span> <span class="pl-s">extends</span> <span class="pl-e">FWObject</span> {
+
+    <span class="pl-st">@FieldText</span>(<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Nombre del automotor<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> nombre;
+
+    <span class="pl-st">@FieldText</span>(<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Modelo del automotor<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> modelo;
+
+    <span class="pl-st">@FieldText</span>(<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Patente del automotor<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> patente;
+
+    <span class="pl-st">@FieldCheck</span>(<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Tiene patente<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-st">boolean</span> tienePatente;
+
+    <span class="pl-st">@FieldSelector</span>(<span class="pl-c1">choices</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>provincias<span class="pl-pds">"</span></span>, <span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Provincias<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> provincia;
+
+    <span class="pl-st">String</span>[] provincias <span class="pl-k">=</span> { <span class="pl-s1"><span class="pl-pds">"</span>Buenos Aires<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>Cordoba<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>La Rioja<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>Chaco<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>Catamarca<span class="pl-pds">"</span></span> };
+
+}</pre></div>
+
+<p>Como puede verse en el ejemplo del codigo con las annotations para atributos, cada atributo tiene en la annotation un <strong>name</strong> que es el texto con el cual se pide el dato dentro del ABM.
+Ademas en el caso del FieldSelector se agrega un parametro <strong>choices</strong> con el cual indicamos el nombre de la varible de clase donde se encuentran las opciones y mas abajo declaramos la variable que es una lista de Strings con las opciones pocibles para ese atributo.</p>
+
+<p>Ahora vamos a agregarle el dato de si algun atributo no es modificable, para eso existe en cualquier annotation de atributo el parametro <strong>modifiable</strong> que por default es True.
+Vamos a definir que el atributo provincia no es modificable:</p>
+
+<div class="highlight highlight-java"><pre>@Title(title <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Autos ABM<span class="pl-pds">"</span></span>)
+<span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">Auto</span> <span class="pl-s">extends</span> <span class="pl-e">FWObject</span> {
+
+    <span class="pl-st">@FieldText</span>(<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Nombre del automotor<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> nombre;
+
+    <span class="pl-st">@FieldText</span>(<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Modelo del automotor<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> modelo;
+
+    <span class="pl-st">@FieldText</span>(<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Patente del automotor<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> patente;
+
+    <span class="pl-st">@FieldCheck</span>(<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Tiene patente<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-st">boolean</span> tienePatente;
+
+    <span class="pl-st">@FieldSelector</span>(<span class="pl-c1">choices</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>provincias<span class="pl-pds">"</span></span>, <span class="pl-c1">modifiable</span> <span class="pl-k">=</span> <span class="pl-c1">false</span>, <span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Provincias<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> provincia;
+
+    <span class="pl-st">String</span>[] provincias <span class="pl-k">=</span> { <span class="pl-s1"><span class="pl-pds">"</span>Buenos Aires<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>Cordoba<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>La Rioja<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>Chaco<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>Catamarca<span class="pl-pds">"</span></span> };
+
+}</pre></div>
+
+<p>Ahora vamos a agregarle el dato de si algun atributo es si o si requerido, para eso existe en cualquier annotation de atributo el parametro <strong>required</strong> que por default es False.
+Vamos a definir que el atributo patente es requerido:</p>
+
+<div class="highlight highlight-java"><pre>@Title(title <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Autos ABM<span class="pl-pds">"</span></span>)
+<span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">Auto</span> <span class="pl-s">extends</span> <span class="pl-e">FWObject</span> {
+
+    <span class="pl-st">@FieldText</span>(<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Nombre del automotor<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> nombre;
+
+    <span class="pl-st">@FieldText</span>(<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Modelo del automotor<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> modelo;
+
+    <span class="pl-st">@FieldText</span>(<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Patente del automotor<span class="pl-pds">"</span></span>, <span class="pl-c1">required</span><span class="pl-k">=</span><span class="pl-c1">true</span>)
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> patente;
+
+    <span class="pl-st">@FieldCheck</span>(<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Tiene patente<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-st">boolean</span> tienePatente;
+
+    <span class="pl-st">@FieldSelector</span>(<span class="pl-c1">choices</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>provincias<span class="pl-pds">"</span></span>, <span class="pl-c1">modifiable</span> <span class="pl-k">=</span> <span class="pl-c1">false</span>, <span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Provincias<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> provincia;
+
+    <span class="pl-st">String</span>[] provincias <span class="pl-k">=</span> { <span class="pl-s1"><span class="pl-pds">"</span>Buenos Aires<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>Cordoba<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>La Rioja<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>Chaco<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>Catamarca<span class="pl-pds">"</span></span> };
+
+}</pre></div>
+
+<p>Para agregar mas opciones y hacer que el ABM sea mucho mejor, existen los validadores que se ejecutan en tiempo real miestras los usuarios ingresan datos.
+Para validar el framework ofrece dos posibles parametros en todos los annotations:</p>
+
+<ul>
+<li>
+<strong>fwValidator</strong>: Validadores predefinidos por el framework</li>
+<li>
+<strong>validator</strong>: Nombre del metodo validador que la clase tenga</li>
+</ul>
+
+<p>Para mostrar el uso vamos a agregar un validador en la clase <strong>validarPatente</strong> y un fwValidator llamado <strong>validateNumbers</strong> que valida que el dato ingresado sea numerico.</p>
+
+<div class="highlight highlight-java"><pre>@Title(title <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Autos ABM<span class="pl-pds">"</span></span>)
+<span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">Auto</span> <span class="pl-s">extends</span> <span class="pl-e">FWObject</span> {
+
+    <span class="pl-st">@FieldText</span>(<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Nombre del automotor<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> nombre;
+
+    <span class="pl-st">@FieldText</span>(<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Modelo del automotor<span class="pl-pds">"</span></span>, <span class="pl-c1">fwValidator</span><span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>validateNumbers<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> modelo;
+
+    <span class="pl-st">@FieldText</span>(<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Patente del automotor<span class="pl-pds">"</span></span>, <span class="pl-c1">required</span><span class="pl-k">=</span><span class="pl-c1">true</span>, <span class="pl-c1">validator</span><span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>validarPatente<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> patente;
+
+    <span class="pl-st">@FieldCheck</span>(<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Tiene patente<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-st">boolean</span> tienePatente;
+
+    <span class="pl-st">@FieldSelector</span>(<span class="pl-c1">choices</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>provincias<span class="pl-pds">"</span></span>, <span class="pl-c1">modifiable</span> <span class="pl-k">=</span> <span class="pl-c1">false</span>, <span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Provincias<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> provincia;
+
+    <span class="pl-st">String</span>[] provincias <span class="pl-k">=</span> { <span class="pl-s1"><span class="pl-pds">"</span>Buenos Aires<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>Cordoba<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>La Rioja<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>Chaco<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>Catamarca<span class="pl-pds">"</span></span> };
+
+    <span class="pl-s">public</span> <span class="pl-st">boolean</span> <span class="pl-en">validarPatente</span>(<span class="pl-stj">String</span> <span class="pl-v">patente</span>){
+        <span class="pl-stj">String</span> <span class="pl-c1">PATENTE_PATTERN</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>^[a-zA-Z]{0,3}[0-9]{0,3}$<span class="pl-pds">"</span></span>;
+        <span class="pl-k">return</span> <span class="pl-stj">Pattern</span><span class="pl-k">.</span>compile(<span class="pl-c1">PATENTE_PATTERN</span>)<span class="pl-k">.</span>matcher(patente)<span class="pl-k">.</span>matches();
+    }
+
+}</pre></div>
+
+<p>Con esto tenemos toda una Clase adaptada para el ABM. 
+Algo mas que podemos agregarle son metodos para persistencia propia de los datos.
+Para lograr esto el framework ofrece los siguientes parametros en el annotation <strong>Title</strong>:</p>
+
+<ul>
+<li>
+<strong>addMethod</strong>: Metodo para agregar un objeto Auto</li>
+<li>
+<strong>editMethod</strong>: Metodo para modificar un objeto Auto</li>
+<li>
+<strong>removeMethod</strong>: Metodo para eliminar un objeto Auto</li>
+<li>
+<strong>getInitialMethod</strong>: Metodo para obtener los datos iniciales</li>
+</ul>
+
+<p>En este caso vamos a agregar un metodo que nos da los datos iniciales</p>
+
+<div class="highlight highlight-java"><pre>@Title(title <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Autos ABM<span class="pl-pds">"</span></span>, getInitialMethod<span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>getAutos<span class="pl-pds">"</span></span>)
+<span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">Auto</span> <span class="pl-s">extends</span> <span class="pl-e">FWObject</span> { 
+
+    <span class="pl-st">@FieldText</span>(<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Nombre del automotor<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> nombre;
+
+    <span class="pl-st">@FieldText</span>(<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Modelo del automotor<span class="pl-pds">"</span></span>, <span class="pl-c1">fwValidator</span><span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>validateNumbers<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> modelo;
+
+    <span class="pl-st">@FieldText</span>(<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Patente del automotor<span class="pl-pds">"</span></span>, <span class="pl-c1">required</span><span class="pl-k">=</span><span class="pl-c1">true</span>, <span class="pl-c1">validator</span><span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>validarPatente<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> patente;
+
+    <span class="pl-st">@FieldCheck</span>(<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Tiene patente<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-st">boolean</span> tienePatente;
+
+    <span class="pl-st">@FieldSelector</span>(<span class="pl-c1">choices</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>provincias<span class="pl-pds">"</span></span>, <span class="pl-c1">modifiable</span> <span class="pl-k">=</span> <span class="pl-c1">false</span>, <span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Provincias<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> provincia;
+
+    <span class="pl-st">String</span>[] provincias <span class="pl-k">=</span> { <span class="pl-s1"><span class="pl-pds">"</span>Buenos Aires<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>Cordoba<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>La Rioja<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>Chaco<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>Catamarca<span class="pl-pds">"</span></span> };
+
+    <span class="pl-s">public</span> <span class="pl-st">boolean</span> <span class="pl-en">validarPatente</span>(<span class="pl-stj">String</span> <span class="pl-v">patente</span>){
+        <span class="pl-stj">String</span> <span class="pl-c1">PATENTE_PATTERN</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>^[a-zA-Z]{0,3}[0-9]{0,3}$<span class="pl-pds">"</span></span>;
+        <span class="pl-k">return</span> <span class="pl-stj">Pattern</span><span class="pl-k">.</span>compile(<span class="pl-c1">PATENTE_PATTERN</span>)<span class="pl-k">.</span>matcher(patente)<span class="pl-k">.</span>matches();
+    }
+
+    <span class="pl-s">public</span> <span class="pl-st">List&lt;<span class="pl-stj">Auto</span>&gt;</span> <span class="pl-en">getAutos</span>(){
+        <span class="pl-st">ArrayList&lt;<span class="pl-stj">Auto</span>&gt;</span> autos <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-st">ArrayList&lt;<span class="pl-stj">Auto</span>&gt;</span>();
+        autos<span class="pl-k">.</span>add(<span class="pl-k">new</span> <span class="pl-stj">Auto</span>(<span class="pl-s1"><span class="pl-pds">"</span>Citroen C3<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>JPU409<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>Buenos Aires<span class="pl-pds">"</span></span>, <span class="pl-c1">true</span>));
+        autos<span class="pl-k">.</span>add(<span class="pl-k">new</span> <span class="pl-stj">Auto</span>(<span class="pl-s1"><span class="pl-pds">"</span>Citroen C4<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>CVU429<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>Catamarca<span class="pl-pds">"</span></span>, <span class="pl-c1">true</span>));
+        autos<span class="pl-k">.</span>add(<span class="pl-k">new</span> <span class="pl-stj">Auto</span>(<span class="pl-s1"><span class="pl-pds">"</span>Ford Ka<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>ERD123<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>Chaco<span class="pl-pds">"</span></span>, <span class="pl-c1">true</span>));
+        autos<span class="pl-k">.</span>add(<span class="pl-k">new</span> <span class="pl-stj">Auto</span>(<span class="pl-s1"><span class="pl-pds">"</span>Volkswagen Gol<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>La Rioja<span class="pl-pds">"</span></span>, <span class="pl-c1">false</span>));
+        <span class="pl-k">return</span> autos; 
+    }
+
+}</pre></div>
+
+<p>Con todo esto ya tenemos una clase Auto totalmente configurada para poder hacer el ABM.
+Para generar el ABM vamos a crear un main dentro de una clase de Test para mostrar el como generar un ABM:</p>
+
+<div class="highlight highlight-java"><pre>
+<span class="pl-k">import</span> <span class="pl-smi">implementation.applicationModel.ABMApplicationModel</span>;
+<span class="pl-k">import</span> <span class="pl-smi">implementation.ui.MainWindow</span>;
+<span class="pl-k">import</span> <span class="pl-smi">org.uqbar.arena.Application</span>;
+<span class="pl-k">import</span> <span class="pl-smi">org.uqbar.arena.windows.Window</span>;
+
+<span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">TestApplication</span> <span class="pl-s">extends</span> <span class="pl-e">Application</span> {
+
+    <span class="pl-st">@Override</span>
+    <span class="pl-s">protected</span> <span class="pl-st">Window&lt;?&gt;</span> <span class="pl-en">createMainWindow</span>() {
+        <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-stj">MainWindow</span>(<span class="pl-v">this</span>, <span class="pl-k">new</span> <span class="pl-stj">ABMApplicationModel</span>(<span class="pl-stj">Auto</span><span class="pl-k">.</span>class));
+    }
+
+    <span class="pl-s">public</span> <span class="pl-s">static</span> <span class="pl-st">void</span> <span class="pl-en">main</span>(<span class="pl-st">String</span>[] <span class="pl-v">args</span>) {
+        <span class="pl-k">new</span> <span class="pl-stj">TestApplication</span>()<span class="pl-k">.</span>start();
+    }
+
+}</pre></div>
+
+<p>Con todo eso ya tenemos un ejemplo de un ABM.
+La ventana quedaria asi apenas se abre:</p>
+
+<p><img src="docs/pantallaAuto.png" alt="pantallaAuto" title="pantallaAuto"></p>
+
+<p>Ventana para agregar:</p>
+
+<p><img src="docs/pantallaAutoAdd.png" alt="pantallaAutoAdd" title="pantallaAutoAdd"></p>
+
+<p>Ventana para ver:</p>
+
+<p><img src="docs/pantallaAutoView.png" alt="pantallaAutoView" title="pantallaAutoView"></p>
+
+<p>Ventana para modificar:</p>
+
+<p><img src="docs/pantallaAutoEdit.png" alt="pantallaAutoEdit" title="pantallaAutoEdit"></p>
+
+<h2>
+<a id="ejemplo-de-uso-para-multiples-clase" class="anchor" href="#ejemplo-de-uso-para-multiples-clase" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ejemplo de uso para Multiples Clase:</h2>
+
+<p>Este framework agrega la opcion de usar multiples Clases y seleccionar cual ABM ir abrirndo para trabajar.
+Para esto agregamos la clase Chofer, ya adapatadar para el framework.
+El codigo de Chofer es:</p>
+
+<div class="highlight highlight-java"><pre>@Title(title <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Chofer ABM<span class="pl-pds">"</span></span>, addMethod<span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>add<span class="pl-pds">"</span></span>, editMethod<span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>edit<span class="pl-pds">"</span></span>, removeMethod<span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>remove<span class="pl-pds">"</span></span>)
+<span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">Chofer</span> <span class="pl-s">extends</span> <span class="pl-e">FWObject</span> {
+
+    <span class="pl-st">@FieldText</span>(<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Nombre del chofer<span class="pl-pds">"</span></span>, <span class="pl-c1">validator</span><span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>validateName<span class="pl-pds">"</span></span>)
+    <span class="pl-s">private</span> <span class="pl-stj">String</span> nombre;
+
+    <span class="pl-st">@FieldText</span>(<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Domicilio del chofer<span class="pl-pds">"</span></span>, <span class="pl-c1">required</span><span class="pl-k">=</span><span class="pl-c1">true</span>)
+    <span class="pl-s">private</span> <span class="pl-stj">String</span> domicilio;
+
+    <span class="pl-st">@FieldCheck</span>(<span class="pl-c1">modifiable</span> <span class="pl-k">=</span> <span class="pl-c1">false</span>, <span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Tiene auto<span class="pl-pds">"</span></span>)
+    <span class="pl-s">private</span> <span class="pl-st">boolean</span> tieneAuto;
+
+    <span class="pl-st">@FieldSelector</span>(<span class="pl-c1">choices</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>provincias<span class="pl-pds">"</span></span>, <span class="pl-c1">modifiable</span> <span class="pl-k">=</span> <span class="pl-c1">false</span>, <span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Provincias<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> provincia;
+
+    <span class="pl-st">String</span>[] provincias <span class="pl-k">=</span> { <span class="pl-s1"><span class="pl-pds">"</span>Buenos Aires<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>Cordoba<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>La Rioja<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>Chaco<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>Catamarca<span class="pl-pds">"</span></span> };
+
+    <span class="pl-s">public</span> <span class="pl-st">boolean</span> <span class="pl-en">validateName</span>(<span class="pl-stj">String</span> <span class="pl-v">name</span>){
+        <span class="pl-stj">String</span> <span class="pl-c1">NAME_PATTERN</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>^[a-zA-Z]{0,20}$<span class="pl-pds">"</span></span>;
+        <span class="pl-k">return</span> <span class="pl-stj">Pattern</span><span class="pl-k">.</span>compile(<span class="pl-c1">NAME_PATTERN</span>)<span class="pl-k">.</span>matcher(name)<span class="pl-k">.</span>matches();
+    }
+
+    <span class="pl-st">@Override</span>
+    <span class="pl-s">public</span> <span class="pl-stj">String</span> <span class="pl-en">toString</span>() {
+        <span class="pl-stj">String</span> texto <span class="pl-k">=</span> <span class="pl-v">this</span><span class="pl-k">.</span>nombre <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>, con domicilio en <span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-v">this</span><span class="pl-k">.</span>domicilio <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span> (provincia: <span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-v">this</span><span class="pl-k">.</span>provincia <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>) y <span class="pl-pds">"</span></span>;
+        <span class="pl-k">if</span> (<span class="pl-v">this</span><span class="pl-k">.</span>tieneAuto) <span class="pl-k">return</span> texto <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>tiene auto<span class="pl-pds">"</span></span>;
+        <span class="pl-k">else</span> <span class="pl-k">return</span> texto <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span> no tiene auto<span class="pl-pds">"</span></span>;
+    }
+
+    <span class="pl-s">public</span> <span class="pl-st">void</span> <span class="pl-en">add</span>(<span class="pl-stj">Chofer</span> <span class="pl-v">chofer</span>){
+        <span class="pl-v">this</span><span class="pl-k">.</span>loggeo(<span class="pl-s1"><span class="pl-pds">"</span>Se agrego -&gt; <span class="pl-pds">"</span></span> <span class="pl-k">+</span> chofer<span class="pl-k">.</span>toString());
+    }
+
+    <span class="pl-s">public</span> <span class="pl-st">void</span> <span class="pl-en">edit</span>(<span class="pl-stj">Chofer</span> <span class="pl-v">chofer</span>){
+        <span class="pl-v">this</span><span class="pl-k">.</span>loggeo(<span class="pl-s1"><span class="pl-pds">"</span>Se modifico -&gt; <span class="pl-pds">"</span></span> <span class="pl-k">+</span> chofer<span class="pl-k">.</span>toString());
+    }
+
+    <span class="pl-s">public</span> <span class="pl-st">void</span> <span class="pl-en">remove</span>(<span class="pl-stj">Chofer</span> <span class="pl-v">chofer</span>){
+        <span class="pl-v">this</span><span class="pl-k">.</span>loggeo(<span class="pl-s1"><span class="pl-pds">"</span>Se elimino -&gt; <span class="pl-pds">"</span></span> <span class="pl-k">+</span> chofer<span class="pl-k">.</span>toString());
+    }
+
+    <span class="pl-s">public</span> <span class="pl-st">void</span> <span class="pl-en">loggeo</span>(<span class="pl-stj">String</span> <span class="pl-v">texto</span>){
+         <span class="pl-stj">Logger</span> logger <span class="pl-k">=</span> <span class="pl-stj">Logger</span><span class="pl-k">.</span>getLogger(<span class="pl-s1"><span class="pl-pds">"</span>ChoferLog<span class="pl-pds">"</span></span>);  
+         <span class="pl-stj">FileHandler</span> fh;
+        <span class="pl-k">try</span> {
+            fh <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-stj">FileHandler</span>(<span class="pl-s1"><span class="pl-pds">"</span>/tmp/choferes.log<span class="pl-pds">"</span></span>);
+            logger<span class="pl-k">.</span>addHandler(fh);
+            <span class="pl-stj">SimpleFormatter</span> formatter <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-stj">SimpleFormatter</span>();
+            fh<span class="pl-k">.</span>setFormatter(formatter);
+            logger<span class="pl-k">.</span>info(texto);
+        } <span class="pl-k">catch</span> (<span class="pl-stj">SecurityException</span> <span class="pl-k">|</span> <span class="pl-stj">IOException</span> e) {
+            e<span class="pl-k">.</span>printStackTrace();
+        }
+    }
+}</pre></div>
+
+<p>Con esta clase ya podemos crear en una clase de test una ejemplo de manejo de multiples clases
+El codigo para la aplicacion seria:</p>
+
+<div class="highlight highlight-java"><pre><span class="pl-k">import</span> <span class="pl-smi">java.util.ArrayList</span>;
+
+<span class="pl-k">import</span> <span class="pl-smi">implementation.FWObject</span>;
+<span class="pl-k">import</span> <span class="pl-smi">implementation.applicationModel.MultiABMApplicationModel</span>;
+<span class="pl-k">import</span> <span class="pl-smi">implementation.ui.MultiMainWindow</span>;
+
+<span class="pl-k">import</span> <span class="pl-smi">org.uqbar.arena.Application</span>;
+<span class="pl-k">import</span> <span class="pl-smi">org.uqbar.arena.windows.Window</span>;
+
+<span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">TestApplication</span> <span class="pl-s">extends</span> <span class="pl-e">Application</span> {
+
+    <span class="pl-st">@Override</span>
+    <span class="pl-s">protected</span> <span class="pl-st">Window&lt;?&gt;</span> <span class="pl-en">createMainWindow</span>() {
+        <span class="pl-st">ArrayList&lt;<span class="pl-st">Class&lt;? extends <span class="pl-stj">FWObject</span>&gt;</span>&gt;</span> list <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-st">ArrayList&lt;<span class="pl-st">Class&lt;? extends <span class="pl-stj">FWObject</span>&gt;</span>&gt;</span>();
+        list<span class="pl-k">.</span>add(<span class="pl-stj">Auto</span><span class="pl-k">.</span>class);
+        list<span class="pl-k">.</span>add(<span class="pl-stj">Chofer</span><span class="pl-k">.</span>class);
+        <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-stj">MultiMainWindow</span>(<span class="pl-v">this</span>, <span class="pl-k">new</span> <span class="pl-stj">MultiABMApplicationModel</span>(list));
+    }
+
+    <span class="pl-s">public</span> <span class="pl-s">static</span> <span class="pl-st">void</span> <span class="pl-en">main</span>(<span class="pl-st">String</span>[] <span class="pl-v">args</span>) {
+        <span class="pl-k">new</span> <span class="pl-stj">TestApplication</span>()<span class="pl-k">.</span>start();
+    }
+}</pre></div>
+
+<p>Con esto ya tenemos una ventana que nos permite elegir la clase para trabajar en ABM:</p>
+
+<p><img src="docs/pantallaMultiClass.png" alt="pantallaMultiClass" title="pantallaMultiClass"></p>
+
+<p>En esa pantalla solo tocamos los botones y se abre el ABM de esa Clase y despues se puede retornar para abrir otra ABM.</p>
+
+<h2>
+<a id="desarrolladores" class="anchor" href="#desarrolladores" aria-hidden="true"><span class="octicon octicon-link"></span></a>Desarrolladores:</h2>
+
+<ul>
+<li><strong>Federico Gonzalez</strong></li>
+<li><strong>Erwin Debusschere</strong></li>
+<li><strong>Sergio Rivas</strong></li>
+<li><strong>Alexis Chan</strong></li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Arena-abm-builder maintained by <a href="https://github.com/FedeG">FedeG</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
